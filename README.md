@@ -1,2 +1,3 @@
 # ProjectCCC
-A personal Project To provide a platform for small businesses
+A personal Project To provide a platform for small businesses 
+PROJECT IN PROGRESS
