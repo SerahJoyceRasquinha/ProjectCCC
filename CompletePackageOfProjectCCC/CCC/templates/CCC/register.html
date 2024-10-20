@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Register</title>
+    <style>
+        /* General page styles */
+        body {
+            padding-bottom: 2%;
+            background-color: black;
+            color: white;
+            height: 100vh;
+            margin: 0;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+        }
+
+
+        /* Flexbox for positioning the buttons */
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            padding: 0 20px;
+        }
+
+        /* Back button */
+        h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 4%;
+            margin-top: 10%;
+            padding-top: 60px; /* Adds space between the back button and the heading */
+        }
+
+        /* Back button */
+        .back {
+            position: absolute;
+            left: 20px; /* Adds space from the left */
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: 2px solid lightblue;
+            background-color: lightblue;
+            color: black;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+        
+        .back:hover {
+            border-color: darkblue;
+            background-color: darkblue;
+            color: white;
+        }  color: white;
+        
+
+        /* Log out button */
+        .logout-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .logout-btn:hover {
+            background-color: #c0392b;
+        }
+
+        /* Form input fields styling */
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-size: 1.1rem;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 96%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border: 2px solid black;
+            font-size: 1rem;
+            box-sizing: border-box; /* Ensure padding is included in total width */
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        /* Submit button styling */
+        input[type="submit"] {
+            display: block;
+            background-color: #007bff; /* Blue */
+            color: white;
+            padding: 10px 20px;
+            border: 2px solid black; /* Black border */
+            border-radius: 20px; /* Rounded edges */
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease; /* Smooth hover effect */
+            text-align: center;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3; /* Dark blue on hover */
+        }
+
+        input[type="submit"]:active {
+            background-color: #e0b3ff; /* Light purple when clicked */
+        }
+
+        h1, form {
+            margin-left: 5%;
+            margin-bottom: 2%;
+        }
+
+        .must {
+            color: red;
+        }
+
+        .noofjr {
+            font-size: 1rem;
+        }
+
+        .description-box,
+        .locality-box {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Button container for Back and Log out buttons -->
+    <div class="button-container">
+        <button onclick="window.location.href='{% url 'homepage' %}'">BACK</button>
+        <button onclick="window.location.href='{% url 'logout' %}'">Log Out</button>
+    </div>
+
+    <!-- Registration Form -->
+    <h1>Register:</h1>        
+    <form method="post">
+        {% csrf_token %}
+
+        <!-- Name input -->
+        <label for="name"><span class="must">* </span>Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <!-- Job Role 1 and related fields -->
+        <label for="job_role_1"><span class="must">* </span>Job Role 1:</label>
+        <input type="text" id="job_role_1" name="job_role_1" oninput="toggleFields(1)"><br>
+
+        <div class="locality-box" id="locality_1_box">
+            <label for="locality_1">Locality 1:</label>
+            <input type="text" id="locality_1" name="locality_1">
+        </div>
+
+        <div class="description-box" id="description_1_box">
+            <label for="description_1">Description 1:</label>
+            <textarea id="description_1" name="description_1"></textarea>
+        </div>
+
+        <!-- Job Role 2 and related fields -->
+        <label for="job_role_2">Job Role 2:</label>
+        <input type="text" id="job_role_2" name="job_role_2" oninput="toggleFields(2)"><br>
+
+        <div class="locality-box" id="locality_2_box">
+            <label for="locality_2">Locality 2:</label>
+            <input type="text" id="locality_2" name="locality_2">
+        </div>
+
+        <div class="description-box" id="description_2_box">
+            <label for="description_2">Description 2:</label>
+            <textarea id="description_2" name="description_2"></textarea>
+        </div>
+
+        <!-- Job Role 3 and related fields -->
+        <label for="job_role_3">Job Role 3:</label>
+        <input type="text" id="job_role_3" name="job_role_3" oninput="toggleFields(3)"><br>
+
+        <div class="locality-box" id="locality_3_box">
+            <label for="locality_3">Locality 3:</label>
+            <input type="text" id="locality_3" name="locality_3">
+        </div>
+
+        <div class="description-box" id="description_3_box">
+            <label for="description_3">Description 3:</label>
+            <textarea id="description_3" name="description_3"></textarea>
+        </div>
+
+        <!-- Job Role 4 and related fields -->
+        <label for="job_role_4">Job Role 4:</label>
+        <input type="text" id="job_role_4" name="job_role_4" oninput="toggleFields(4)"><br>
+
+        <div class="locality-box" id="locality_4_box">
+            <label for="locality_4">Locality 4:</label>
+            <input type="text" id="locality_4" name="locality_4">
+        </div>
+
+        <div class="description-box" id="description_4_box">
+            <label for="description_4">Description 4:</label>
+            <textarea id="description_4" name="description_4"></textarea>
+        </div>
+
+        <!-- Job Role 5 and related fields -->
+        <label for="job_role_5">Job Role 5:</label>
+        <input type="text" id="job_role_5" name="job_role_5" oninput="toggleFields(5)"><br>
+
+        <div class="locality-box" id="locality_5_box">
+            <label for="locality_5">Locality 5:</label>
+            <input type="text" id="locality_5" name="locality_5">
+        </div>
+
+        <div class="description-box" id="description_5_box">
+            <label for="description_5">Description 5:</label>
+            <textarea id="description_5" name="description_5"></textarea>
+        </div>
+
+        <!-- Phone input -->
+        <label for="phone"><span class="must">* </span>Phone:</label>
+        <input type="text" id="phone" name="phone" required>
+
+        <!-- Submit button -->
+        <input type="submit" value="Submit">
+    </form>
+    <script>
+        // Disable zooming on the page
+        document.addEventListener('wheel', function(event) {
+            if (event.ctrlKey) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && (event.key === '=' || event.key === '-' || event.key === '0')) {
+                event.preventDefault();
+            }
+        });
+
+        // Prevent pinch-to-zoom on touch devices
+        document.addEventListener('gesturestart', function(event) {
+            event.preventDefault();
+        });
+
+        // Prevent zooming on touchpad gestures
+        document.addEventListener('touchmove', function(event) {
+            if (event.touches.length > 1) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+
+        // Reset zoom to 100% on page load
+        window.onload = function() {
+            document.body.style.transform = 'scale(1)';
+            document.body.style.transformOrigin = '0 0';
+            document.body.style.width = '100%';
+        };
+    </script>
+
+    <!-- JavaScript to handle form logic -->
+    <script>
+        function toggleFields(roleNumber) {
+            const jobRoleInput = document.getElementById('job_role_' + roleNumber);
+            const localityBox = document.getElementById('locality_' + roleNumber + '_box');
+            const descriptionBox = document.getElementById('description_' + roleNumber + '_box');
+            
+            if (jobRoleInput.value.trim() !== '') {
+                localityBox.style.display = 'block';
+                descriptionBox.style.display = 'block';
+            } else {
+                localityBox.style.display = 'none';
+                descriptionBox.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

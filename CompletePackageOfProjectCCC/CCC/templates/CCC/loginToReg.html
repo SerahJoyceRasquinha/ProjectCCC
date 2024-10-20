@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Sign Up</title>
+    <style>
+        /* General page styles */
+        body {
+            padding-bottom: 2%;
+            background-color: black;
+            color: white;
+            height: 100vh;
+            margin: 0;             
+            font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 4%;
+            margin-top: 10%;
+            padding-top: 60px; /* Adds space between the back button and the heading */
+        }
+
+        /* Back button */
+        .back {
+            position: absolute;
+            left: 20px; /* Adds space from the left */
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: 2px solid lightblue;
+            background-color: lightblue;
+            color: black;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+        
+        .back:hover {
+            border-color: darkblue;
+            background-color: darkblue;
+            color: white;
+        }
+
+        h1, form {
+            margin-left: 5%;
+            margin-bottom: 2%;
+        }
+
+        .buttons {
+            margin-left: 10%;
+        }
+
+        .button-container {
+            display: flex;
+            -webkit-text-stroke-width: 2px;
+            -webkit-text-stroke-color: black;
+        }
+
+        button {
+            background-color: #00a1a1;
+            color: white;
+            border: 2px solid black;
+            padding: 15px 30px;
+            font-size: 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            font-weight: bold;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            margin-left: 4%;
+        }
+
+        /* Hover effect: change background color and add a light white shadow */
+        button:hover {
+            background-color: darkblue;
+            box-shadow: 0px 0px 15px 5px rgba(255, 255, 255, 0.4); /* Light white shadow on hover */
+        }
+
+        p {
+            margin-left: 5%;
+            margin-bottom: 2%;
+            font-size: 2rem;
+        }
+    </style>
+    <script>
+        // Disable zooming on the page
+        document.addEventListener('wheel', function(event) {
+            if (event.ctrlKey) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && (event.key === '=' || event.key === '-' || event.key === '0')) {
+                event.preventDefault();
+            }
+        });
+
+        // Prevent pinch-to-zoom on touch devices
+        document.addEventListener('gesturestart', function(event) {
+            event.preventDefault();
+        });
+
+        // Prevent zooming on touchpad gestures
+        document.addEventListener('touchmove', function(event) {
+            if (event.touches.length > 1) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+
+        // Reset zoom to 100% on page load
+        window.onload = function() {
+            document.body.style.transform = 'scale(1)';
+            document.body.style.transformOrigin = '0 0';
+            document.body.style.width = '100%';
+        };
+    </script>
+</head>
+<body>
+    <a href="{% url 'homepage' %}#mainContent" class="back">Back</a>
+    <h1>Do you Have an Account In CCC ?:</h1><br>
+    <p>Create an account or Sign Up to Register On the CCC Platform!</p>
+    <div class="buttons">
+        <button onclick="window.location.href='{% url 'signup' %}'">SIGN UP</button>
+        <button onclick="window.location.href='{% url 'signin' %}'">SIGN IN</button>
+    </div>
+</body>
+</html>

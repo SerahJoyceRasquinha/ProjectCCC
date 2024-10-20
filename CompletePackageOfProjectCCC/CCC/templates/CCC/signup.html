@@ -1,0 +1,191 @@
+<!-- signup.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Sign Up</title>
+    <style>
+        /* General page styles */
+        body {
+            padding-bottom: 2%;
+            background-color: black;
+            color: white;
+            height: 100vh;
+            margin: 0;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+        }
+
+        /* Form input fields styling */
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-size: 1.1rem;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 96%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border: 2px solid black;
+            font-size: 1rem;
+            box-sizing: border-box; /* Ensure padding is included in total width */
+        }
+
+        /* Eye icon styling */
+        .eye-icon {
+            cursor: pointer;
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        /* Submit button styling */
+        input[type="submit"] {
+            display: block;
+            background-color: #007bff; /* Blue */
+            color: white;
+            padding: 10px 20px;
+            border: 2px solid black; /* Black border */
+            border-radius: 20px; /* Rounded edges */
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease; /* Smooth hover effect */
+            text-align: center;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3; /* Dark blue on hover */
+        }
+
+        input[type="submit"]:active {
+            background-color: #e0b3ff; /* Light purple when clicked */
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 4%;
+            margin-top: 10%;
+            padding-top: 60px; /* Adds space between the back button and the heading */
+        }
+
+        /* Back button */
+        .back {
+            position: absolute;
+            left: 20px; /* Adds space from the left */
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: 2px solid lightblue;
+            background-color: lightblue;
+            color: black;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+        
+        .back:hover {
+            border-color: darkblue;
+            background-color: darkblue;
+            color: white;
+        }
+
+        h1, form {
+            margin-left: 5%;
+            margin-bottom: 2%;
+        }
+
+        .must {
+            color: red;
+        }
+
+        /* Error message style */
+        .alert {
+            color: #e74c3c;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <a href="{% url 'homepage' %}#mainContent" class="back">Back</a>
+    <h1>Sign Up:</h1>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label for="username"><span class="must">* </span>Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password"><span class="must">* </span>Password:</label>
+        <div style="position: relative;">
+            <input type="password" id="password" name="password" required>
+            <span class="eye-icon" onclick="togglePasswordVisibility('password')">-</span>
+        </div>
+
+        <input type="submit" value="Sign Up">
+    </form>
+    <script>
+        // Disable zooming on the page
+        document.addEventListener('wheel', function(event) {
+            if (event.ctrlKey) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && (event.key === '=' || event.key === '-' || event.key === '0')) {
+                event.preventDefault();
+            }
+        });
+
+        // Prevent pinch-to-zoom on touch devices
+        document.addEventListener('gesturestart', function(event) {
+            event.preventDefault();
+        });
+
+        // Prevent zooming on touchpad gestures
+        document.addEventListener('touchmove', function(event) {
+            if (event.touches.length > 1) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+
+        // Reset zoom to 100% on page load
+        window.onload = function() {
+            document.body.style.transform = 'scale(1)';
+            document.body.style.transformOrigin = '0 0';
+            document.body.style.width = '100%';
+        };
+    </script>
+
+    <script>
+        function togglePasswordVisibility(id) {
+            var passwordField = document.getElementById(id);
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+            } else {
+                passwordField.type = "password";
+            }
+        }
+    </script>
+</body>
+</html>
